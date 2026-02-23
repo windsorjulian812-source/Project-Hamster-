@@ -1,2 +1,19 @@
 # Project-Hamster-
 A.i built apps
+{
+  "name": "project-hamster-fleet",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
+  },
+  "dependencies": {
+    "next": "latest",
+    "react": "latest",
+    "react-dom": "latest",
+    "@supabase/supabase-js": "latest",
+    "stripe": "latest",
+    "lucide-react": "latest"
+  }
+}
