@@ -1,0 +1,26 @@
+import Link from 'next/link';
+
+const FLEET = [
+  { id: 1, name: "LegalDoc AI", category: "Legal" },
+  { id: 2, name: "SEO-Master", category: "Marketing" },
+  { id: 3, name: "AI SEO Optimizer", category: "Marketing" },
+  // This will dynamically scale to 100
+];
+
+export default function FleetDirectory() {
+  return (
+    <div className="container">
+      <h1>The Hamster Fleet</h1>
+      <p>Select a tool from your 101-app enterprise suite.</p>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(250px, 1fr))', gap: '20px', marginTop: '30px' }}>
+        {FLEET.map(app => (
+          <div key={app.id} className="card">
+            <h3>{app.name}</h3>
+            <p>Category: {app.category}</p>
+            <Link href={`/apps/${app.id}`} className="btn-primary">Launch App</Link>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
