@@ -1,0 +1,92 @@
+import { useState } from 'react';
+import Head from 'next/head';
+
+export default function LegalDocAI() {
+  const [docData, setDocData] = useState({
+    companyName: '',
+    clientName: '',
+    state: 'California',
+    agreementType: 'Non-Disclosure Agreement (NDA)',
+  });
+  const [isGenerated, setIsGenerated] = useState(false);
+
+  const handleGenerate = () => {
+    if (!docData.companyName || !docData.clientName) {
+      alert("Please fill in all fields to generate the legal draft.");
+      return;
+    }
+    setIsGenerated(true);
+  };
+
+  return (
+    <div className="container">
+      <Head>
+        <title>LegalDoc AI | Project Hamster Fleet</title>
+      </Head>
+
+      <div style={{ maxWidth: '800px', margin: '0 auto' }}>
+        <header style={{ textAlign: 'center', marginBottom: '40px' }}>
+          <h1 style={{ color: '#0070f3', fontSize: '2.5rem' }}>LegalDoc AI</h1>
+          <p style={{ color: '#666' }}>App #1 of the Project Hamster Enterprise Fleet</p>
+        </header>
+
+        <div className="card">
+          <h3>Document Configuration</h3>
+          <div style={{ display: 'grid', gap: '15px', marginTop: '20px' }}>
+            <label>
+              <strong>Agreement Type:</strong>
+              <select 
+                value={docData.agreementType}
+                onChange={(e) => setDocData({...docData, agreementType: e.target.value})}
+                style={{ width: '100%', padding: '12px', marginTop: '5px', borderRadius: '5px' }}
+              >
+                <option>Non-Disclosure Agreement (NDA)</option>
+                <option>Independent Contractor Agreement</option>
+                <option>Service Level Agreement (SLA)</option>
+              </select>
+            </label>
+
+            <input 
+              placeholder="Your Company Name" 
+              value={docData.companyName}
+              onChange={(e) => setDocData({...docData, companyName: e.target.value})}
+              style={{ padding: '12px', borderRadius: '5px', border: '1px solid #ddd' }}
+            />
+
+            <input 
+              placeholder="Client/Counterparty Name" 
+              value={docData.clientName}
+              onChange={(e) => setDocData({...docData, clientName: e.target.value})}
+              style={{ padding: '12px', borderRadius: '5px', border: '1px solid #ddd' }}
+            />
+
+            <button 
+              onClick={handleGenerate} 
+              className="btn-primary"
+              style={{ padding: '15px', fontSize: '1.1rem', cursor: 'pointer' }}
+            >
+              Generate Professional Draft
+            </button>
+          </div>
+        </div>
+
+        {isGenerated && (
+          <div className="card" style={{ marginTop: '30px', border: '2px solid #0070f3', backgroundColor: '#f9faff' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+              <h3>Generated Draft</h3>
+              <button onClick={() => window.print()} style={{ cursor: 'pointer' }}>Download PDF</button>
+            </div>
+            <hr />
+            <div style={{ padding: '20px', backgroundColor: '#fff', borderRadius: '5px', fontSize: '0.9rem', lineHeight: '1.6', color: '#333' }}>
+              <h4 style={{ textAlign: 'center' }}>{docData.agreementType.toUpperCase()}</h4>
+              <p>This agreement is entered into as of {new Date().toLocaleDateString()}, by and between <strong>{docData.companyName}</strong> ("Disclosing Party") and <strong>{docData.clientName}</strong> ("Receiving Party"), both located in the state of {docData.state}.</p>
+              <p><strong>1. Purpose:</strong> The parties wish to explore a business opportunity of mutual interest and in connection with this opportunity...</p>
+              <p><strong>2. Confidential Information:</strong> For purposes of this Agreement, "Confidential Information" shall include all information or material that has or could have commercial value...</p>
+              <p style={{ marginTop: '30px' }}>__________________________<br />Signature of {docData.companyName}</p>
+            </div>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
