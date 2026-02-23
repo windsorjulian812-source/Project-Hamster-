@@ -1,0 +1,40 @@
+import { useState } from 'react';
+
+export default function SEOOptimizer() {
+  const [url, setUrl] = useState('');
+  const [report, setReport] = useState(null);
+
+  const analyzeSEO = () => {
+    // Simulated AI Analysis Logic
+    setReport({
+      score: 88,
+      keywords: ["Hamster", "Efficiency", "Automation"],
+      suggestion: "Increase keyword density in H1 tags."
+    });
+  };
+
+  return (
+    <div className="container">
+      <h2>App #3: AI SEO Optimizer</h2>
+      <div style={{ background: '#f4f4f4', padding: '20px', borderRadius: '8px' }}>
+        <input 
+          type="text" 
+          placeholder="Enter Website URL" 
+          value={url} 
+          onChange={(e) => setUrl(e.target.value)}
+          style={{ width: '70%', padding: '10px', marginRight: '10px' }}
+        />
+        <button onClick={analyzeSEO} className="btn-primary">Run AI Audit</button>
+      </div>
+
+      {report && (
+        <div style={{ marginTop: '20px', padding: '20px', border: '1px solid #0070f3' }}>
+          <h3>Audit Results for {url}</h3>
+          <p><strong>SEO Score:</strong> {report.score}/100</p>
+          <p><strong>Top Keywords:</strong> {report.keywords.join(', ')}</p>
+          <p><strong>AI Recommendation:</strong> {report.suggestion}</p>
+        </div>
+      )}
+    </div>
+  );
+}
