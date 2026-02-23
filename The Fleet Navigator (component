@@ -1,0 +1,16 @@
+import Link from 'next/link';
+
+export default function Navbar() {
+  return (
+    <nav style={{ padding: '20px', borderBottom: '1px solid #eaeaea', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+      <Link href="/" style={{ fontSize: '1.5rem', fontWeight: 'bold', color: '#000', textDecoration: 'none' }}>
+        PROJECT HAMSTER™
+      </Link>
+      <div style={{ display: 'flex', gap: '20px' }}>
+        <Link href="/joe">Project Joe</Link>
+        <Link href="/apps/1">App Fleet</Link>
+        <Link href="mailto:windsorjulian812@gmail.com" style={{ color: '#0070f3' }}>Support</Link>
+      </div>
+    </nav>
+  );
+}
